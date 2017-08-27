@@ -1,0 +1,45 @@
+<h1 class="text-center">TAREFAS</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th data-field="name">Titulo</th>
+                <th data-field="name">Descrição</th>
+                <th data-field="name">Status</th>
+                <th data-field="name">Data Criação</th>
+                <th data-field="name">Data Edição</th>
+                <th data-field="name">Data Conclusão</th>
+                <th data-field="name">Conclui</th>
+                <th data-field="name">Edita</th>
+                <th data-field="name">Delete</th>  
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tarefa of tarefas">
+            <td class="text-center">{{ tarefa.titulo }}</td>
+            <td class="text-center">{{ tarefa.descricao }}</td>
+            <td class="text-center" *ngIf="tarefa.status">Concluida</td>
+            <td class="text-center" *ngIf="!tarefa.status">Pendente</td>
+            <td class="text-center">{{ tarefa.dataCriacao | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+            <td class="text-center">{{ tarefa.dataEdicao | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+            <td class="text-center">{{ tarefa.dataConclusao | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+            <td>
+                <a (click)="conclui(tarefa)">
+                    <i class="glyphicon glyphicon-ok"></i>
+                </a>
+            </td>
+            <td>
+                <a [routerLink]="['/edita', tarefa.id]">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                </a>
+            </td>
+            <td>
+                <a (click)="remove(tarefa)">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </td>      
+          </tr>
+        </tbody>
+    </table>
+</div>
